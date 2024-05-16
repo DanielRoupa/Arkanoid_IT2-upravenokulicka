@@ -19,7 +19,9 @@ namespace Arkanoid_IT2
         }
 
         public override void Draw(Canvas canvas)
-        {
+        { 
+
+        
             Ellipse ellipse = new Ellipse();
             ellipse.Width = 30;
             ellipse.Height = 30;

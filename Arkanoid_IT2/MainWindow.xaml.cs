@@ -76,42 +76,28 @@ namespace Arkanoid_IT2
             timer.Start();
         }
 
-        private void TimerTick(object? sender, EventArgs e)
+        private void Timer_Tick(object? sender, EventArgs e)
         {
             GameCanvas.Children.Clear();
             game.Draw(GameCanvas);
+        }
+
+        private void TimerTick(object? sender, EventArgs e)
+        {
+            
+            MoveBall();
         }
 
         private void GameCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             game.SetBoardLocation(e.GetPosition(GameCanvas).X);
         }
-        private void pozice()
-        { 
-
-        }
-
-
-            private Ellipse ball;
+        private Ellipse ball;
         private double ballLeft;
         private double ballTop;
         private double ballDiameter = 20;
         private double xSpeed = 3;
         private double ySpeed = 3;
-
-        private void InitializeBall()
-        {
-            ball = new Ellipse();
-            ball.Width = ball.Height = ballDiameter;
-            ball.Fill = Brushes.Blue;
-            Canvas.SetLeft(ball, (GameCanvas.ActualWidth - ballDiameter) / 2);
-            Canvas.SetTop(ball, (GameCanvas.ActualHeight - ballDiameter) / 2);
-            GameCanvas.Children.Add(ball);
-
-            ballLeft = Canvas.GetLeft(ball);
-            ballTop = Canvas.GetTop(ball);
-        }
-
         private void MoveBall()
         {
             ballLeft += xSpeed;
@@ -131,13 +117,6 @@ namespace Arkanoid_IT2
             Canvas.SetTop(ball, ballTop);
         }
 
-        public void Timer_Tick(object? sender, EventArgs e)
-        {
-            MoveBall();
-        }
-    }
-    
-
-    
+    }    
 }
 
