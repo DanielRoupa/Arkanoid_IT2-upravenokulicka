@@ -16,13 +16,16 @@ using System.Windows.Threading;
 
 namespace Arkanoid_IT2
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
-  public partial class MainWindow : Window
-  {
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        private int x, y, xChange, yChange;
+        Random ranNum;
         private Game game;
         private DispatcherTimer timer;
+        private object playground;
 
         private void prototypeMenu()
         {
@@ -62,18 +65,18 @@ namespace Arkanoid_IT2
             InitializeComponent();
         }
 
-       
-    private void Window_Loaded(object sender, RoutedEventArgs e)
-    {
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             prototypeMenu();
             game = new Game();
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(30);
             timer.Tick += Timer_Tick;
             timer.Start();
-    }
+        }
 
-        private void Timer_Tick(object? sender, EventArgs e)
+        private void TimerTick(object? sender, EventArgs e)
         {
             GameCanvas.Children.Clear();
             game.Draw(GameCanvas);
@@ -83,5 +86,58 @@ namespace Arkanoid_IT2
         {
             game.SetBoardLocation(e.GetPosition(GameCanvas).X);
         }
+        private void pozice()
+        { 
+
+        }
+
+
+            private Ellipse ball;
+        private double ballLeft;
+        private double ballTop;
+        private double ballDiameter = 20;
+        private double xSpeed = 3;
+        private double ySpeed = 3;
+
+        private void InitializeBall()
+        {
+            ball = new Ellipse();
+            ball.Width = ball.Height = ballDiameter;
+            ball.Fill = Brushes.Blue;
+            Canvas.SetLeft(ball, (GameCanvas.ActualWidth - ballDiameter) / 2);
+            Canvas.SetTop(ball, (GameCanvas.ActualHeight - ballDiameter) / 2);
+            GameCanvas.Children.Add(ball);
+
+            ballLeft = Canvas.GetLeft(ball);
+            ballTop = Canvas.GetTop(ball);
+        }
+
+        private void MoveBall()
+        {
+            ballLeft += xSpeed;
+            ballTop += ySpeed;
+
+            if (ballLeft <= 0 || ballLeft >= GameCanvas.ActualWidth - ballDiameter)
+            {
+                xSpeed = -xSpeed;
+            }
+
+            if (ballTop <= 0 || ballTop >= GameCanvas.ActualHeight - ballDiameter)
+            {
+                ySpeed = -ySpeed;
+            }
+
+            Canvas.SetLeft(ball, ballLeft);
+            Canvas.SetTop(ball, ballTop);
+        }
+
+        public void Timer_Tick(object? sender, EventArgs e)
+        {
+            MoveBall();
+        }
     }
+    
+
+    
 }
+
