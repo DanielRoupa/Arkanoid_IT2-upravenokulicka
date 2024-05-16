@@ -22,6 +22,8 @@ namespace Arkanoid_IT2
         public void CreateLevel(int level)
         {
             board = new Board(50);
+            ball = new Ball(50);
+            GameObjects.Add(ball);
             GameObjects.Add(board);
         }
         public void SetBoardLocation(double x)

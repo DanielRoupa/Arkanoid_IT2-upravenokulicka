@@ -24,8 +24,8 @@ namespace Arkanoid_IT2
             ellipse.Width = 30;
             ellipse.Height = 30;
             ellipse.Fill = Brushes.Red;
-            Canvas.SetBottom(ellipse, 20);
-            Canvas.SetLeft(ellipse, Location.X - Size / 2);
+            //Canvas.SetBottom(ellipse, 20);
+            //Canvas.SetLeft(ellipse, Location.X - Size / 2);
             canvas.Children.Add(ellipse);
 
         }
